@@ -1,0 +1,23 @@
+name: OWASP ZAP Security Scan
+on:
+  push:
+    branches:
+      - main
+  workflow_dispatch:
+permissions:
+  contents: read
+
+jobs:
+  zap-scan:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout Repository
+        uses: actions/checkout@v4
+
+      - name: OWASP ZAP Baseline Scan
+        uses: zaproxy/action-baseline@v0.15.0
+        with:
+          target: 'https://github.com/Jaisuryas670/OWASP-ZAP-Scanning.git'
+          fail_action: false
+          allow_issue_writing: false
